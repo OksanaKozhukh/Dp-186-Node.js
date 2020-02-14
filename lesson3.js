@@ -1,4 +1,4 @@
-// concat() +
+// concat()
 function myConcat (str, ...arg) {
    for (let i = 0; i < arg.length; i++) {
        str += arg[i]};
@@ -6,30 +6,88 @@ function myConcat (str, ...arg) {
    return str;
 }
 
-console.log(myConcat('В JavaScript ', 'любые ', 'текстовые данные ', 'являются ', 'строками'));
+console.log(myConcat('Язык ', 'программирования ', 'JavaScript'));
 console.log(myConcat('В ', 'JavaScript ', 'любые ', 'текстовые ', 'данные ', 'являются ', 'строками'));
 
 
+// repeat()
+function myRepeat (str, count) {
+    let repeatStr = '';
+    
+    if (count < 0) {throw new RangeError('Repeat count must be non-negative')}
+    if (count === 0) {return ''}
+    if (count === +Infinity) {throw new RangeError('Repeat count must be less than infinity and not overflow maximum string size.')}
 
-// lastIndexOf()
-function myLastIndexOf (str, substr) {
-   let index = 0;
-   
-   for (let i = 0; i < str.length; i++) {
-       if (str[i] === substr) {index = i}}
-   
-   return index;
+    for (let i = 1; i <= count; i++) {
+        repeatStr+= str + ' ';}     
+    
+    return repeatStr;
 }
 
-console.log(myLastIndexOf ('java', 'a'));
-console.log(myLastIndexOf ('simultaneously', 'u'));
-console.log(myLastIndexOf ('together', 't'));
-console.log(myLastIndexOf('В JavaScript любые текстовые данные являются строками', 'а'));
+console.log(myRepeat ('Язык программирования JavaScript', 4));
+console.log(myRepeat('В JavaScript любые текстовые данные являются строками', 2));
+console.log(myRepeat ('Язык программирования JavaScript', -4));
+console.log(myRepeat('В JavaScript любые текстовые данные являются строками', Infinity));
 
 
+//substring()
+function mySubstring (str, start, end = str.length) {
+    let substring = '';
+    
+    if (start === end) {return ''}
+    
+    if (start <= 0 || start === NaN) {start=0}
 
-// includes()
-function myIncludes (str, substr) {
+    if (end <= 0 || end === NaN) {end=0}
+
+    if (start > str.length) {start = str.length}
+
+    if (end > str.length) {end = str.length}
+
+    if (start > end) { let temp = end; end = start; start = temp;}
+
+    for (let i = start; i < end; i++) {
+        substring += str[i];}
+         
+    return substring;
+ }
+ 
+ console.log(mySubstring('Язык программирования JavaScript', 1, 2));
+ console.log(mySubstring('Язык программирования JavaScript', 1, 1));
+ console.log(mySubstring('Язык программирования JavaScript', 1));
+ console.log(mySubstring('Язык программирования JavaScript', -5, 4));
+ console.log(mySubstring('Язык программирования JavaScript', 5, -4));
+ console.log(mySubstring('Язык программирования JavaScript', 100, 4));
+ 
+
+//substr()
+function mySubstr (str, start, length = str.length) {
+   let substr = '';
+
+   if (length > str.length) {length = str.length;}
+
+   if ((length <= 0) || (start > 0 && start >= str.length)) {return '';}
+
+   if (start >= 0) {
+      for (let i = start; i <= start + length - 1; i++) {
+        substr += str[i];}
+        
+   } else {
+       for (let i = str.length + start; i <= str.length + start + length - 1; i++) { 
+        substr += str[i];} }    
+        
+    return substr;
+} 
+
+console.log(mySubstr('Язык программирования JavaScript', 1, 4));
+console.log(mySubstr('Язык программирования JavaScript', -9, 4));
+console.log(mySubstr('Язык программирования JavaScript', 5));
+console.log(mySubstr('Язык программирования JavaScript', 5, -9));
+console.log(mySubstr('Язык программирования JavaScript', 35, 7));
+
+
+ // includes()
+ function myIncludes (str, substr) {
     let result = false;
     
     for (let i = 0; i < str.length; i++) {
@@ -44,58 +102,23 @@ console.log(myIncludes ('together', 'w'));
 console.log(myIncludes('В JavaScript любые текстовые данные являются строками', 'люб'));
 
 
+// lastIndexOf()
+function myLastIndexOf (str, searchValue, fromIndex) {
+    let index = -1;
 
-// repeat() +
-function myRepeat (str, count) {
-    let repeatStr = '';
+    const startIndex = fromIndex > 0? fromIndex : 0;
     
-    for (let i = 1; i <= count; i++) {
-        repeatStr+= str + ' ';}     
+    if(fromIndex > str.length) return -1;
     
-    return repeatStr;
-}
-
-console.log(myRepeat ('java', 4));
-console.log(myRepeat ('simultaneously', 2));
-console.log(myRepeat('В JavaScript любые текстовые данные являются строками', 2));
-
-
-
-//substring() +
-function mySubstring (str, start, end) {
-    let substring = '';
- 
-    for (let i = start; i < end; i++) {
-        substring += str[i];}
-         
-    return substring;
+    for (let i = startIndex; i < str.length; i++) {
+        if (str[i] === searchValue) {index = i}}
+    
+    return index;
  }
  
- console.log(mySubstring('java', 1, 2));
- console.log(mySubstring('simultaneously', 1, 5));
- console.log(mySubstring('В JavaScript любые текстовые данные являются строками', 2, 5));
-
-
-//substr() +
-function mySubstr (str, start, length) {
-   let substr = '';
-
-   if (start >= 0) {
-      for (let i = start; i <= start + length - 1; i++) {
-        substr += str[i];}
-        
-   } else {
-       for (let i = str.length + start; i <= str.length + start + length - 1; i++) { 
-        substr += str[i];} }    
-        
-    return substr;
-} 
-
-/* Если передано отрицательное число, она трактуется как strLength - start, 
-где strLength равна длине строки (например, если параметр start равен -3, 
-    то он трактуется как strLength - 3.)*/
-console.log(mySubstr('java', 1, 2));
-console.log(mySubstr('simultaneously', 0, 4));
-console.log(mySubstr('java', -2, 2));
-console.log(mySubstr('simultaneously', -3, 2));
-console.log(mySubstring('В JavaScript любые текстовые данные являются строками', 0, 5));
+ console.log(myLastIndexOf ('java', 'a', 2));
+ console.log(myLastIndexOf ('simultaneously', 'u'));
+ console.log(myLastIndexOf ('together', 't'));
+ console.log(myLastIndexOf('Язык программирования JavaScript', 'прог'));
+ 
+ 
