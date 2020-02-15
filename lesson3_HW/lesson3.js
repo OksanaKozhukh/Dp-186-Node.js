@@ -10,6 +10,7 @@ console.log(myConcat('Язык ', 'программирования ', 'JavaScri
 console.log(myConcat('В ', 'JavaScript ', 'любые ', 'текстовые ', 'данные ', 'являются ', 'строками'));
 
 
+
 // repeat()
 function myRepeat (str, count) {
     let repeatStr = '';
@@ -28,6 +29,7 @@ console.log(myRepeat ('Язык программирования JavaScript', 4)
 console.log(myRepeat('В JavaScript любые текстовые данные являются строками', 2));
 console.log(myRepeat ('Язык программирования JavaScript', -4));
 console.log(myRepeat('В JavaScript любые текстовые данные являются строками', Infinity));
+
 
 
 //substring()
@@ -60,6 +62,7 @@ function mySubstring (str, start, end = str.length) {
  console.log(mySubstring('Язык программирования JavaScript', 100, 4));
  
 
+
 //substr()
 function mySubstr (str, start, length = str.length) {
    let substr = '';
@@ -85,40 +88,75 @@ console.log(mySubstr('Язык программирования JavaScript', 5))
 console.log(mySubstr('Язык программирования JavaScript', 5, -9));
 console.log(mySubstr('Язык программирования JavaScript', 35, 7));
 
-
- // includes()
- function myIncludes (str, substr) {
-    let result = false;
-    
-    for (let i = 0; i < str.length; i++) {
-        if (str[i] === substr) {result = true}}     
-    
-    return result;
-}
-
-console.log(myIncludes ('java', 's'));
-console.log(myIncludes ('simultaneously', 'u'));
-console.log(myIncludes ('together', 'w'));
-console.log(myIncludes('В JavaScript любые текстовые данные являются строками', 'люб'));
-
+  
 
 // lastIndexOf()
-function myLastIndexOf (str, searchValue, fromIndex) {
-    let index = -1;
+function myLastIndexOf(sourse, subStr, index = sourse.length - 1) {
+    let isFind = false;
+    
+    for (let i = index; i >= 0; i--) {
+      
+        if (sourse[i] === subStr[subStr.length - 1]) {
+            let subStrLength = subStr.length - 2;
+            let sourseOrder = 0;
+            isFind = true;
+            
+            for (let j = subStrLength; j >= 0; j--) {
+                sourseOrder++;
+                
+                if (subStr[j] !== sourse[i - sourseOrder]) { 
+                isFind = false;
+                break;
+                }
+            }
+            
+            if (isFind) {
+                return i - subStr.length + 1;
+            }
+        }
+    }
+  
+    return -1;
+}
+  
+console.log(myLastIndexOf('qwerty', 'wer', '4'));
+console.log(myLastIndexOf('qwerty', 'asawer', '4'));
+console.log(myLastIndexOf('qwertyffferty', 'wer'));
 
-    const startIndex = fromIndex > 0? fromIndex : 0;
+
+
+//includes()
+function myIncludes(str, subStr, position = 0) {
+    let isFind = false;
     
-    if(fromIndex > str.length) return -1;
-    
-    for (let i = startIndex; i < str.length; i++) {
-        if (str[i] === searchValue) {index = i}}
-    
-    return index;
- }
- 
- console.log(myLastIndexOf ('java', 'a', 2));
- console.log(myLastIndexOf ('simultaneously', 'u'));
- console.log(myLastIndexOf ('together', 't'));
- console.log(myLastIndexOf('Язык программирования JavaScript', 'прог'));
- 
- 
+    for (let i = position; i < str.length; i++) {
+      
+        if (str[i] === subStr[0]) {
+            let strOrder = 0;
+            isFind = true;
+            
+            for (let j = subStr[1]; j < subStr.length; j++) {
+                strOrder++;
+                
+                if (subStr[j] !== str[i - strOrder]) { 
+                isFind = false;
+                break;
+                }
+            }
+            
+            if (isFind) {
+                return true;
+            }
+        }
+    }
+  
+    return false;
+  }
+  
+console.log(myIncludes('qwerty', 'wer', '1'));
+console.log(myIncludes('qwerty', 'asawer', '4'));
+console.log(myIncludes('qwertyffferty', 'wer'));
+console.log(myIncludes ('java', 's', 2));
+console.log(myIncludes ('simultaneously', 'u', 5));
+console.log(myIncludes ('together', 'w'));
+console.log(myIncludes('В JavaScript любые текстовые данные являются строками', 'люб'));
