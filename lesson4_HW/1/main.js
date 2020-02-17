@@ -67,17 +67,17 @@ function oldAndNew(carsArr){
     //Выдает массив объектов с датой и именем авто самого раннего и самого позднего в массиве
     //[{name : 'HONDA (Мопед)', date : '2009-09-18T00:00:00'}, {name : 'ВАЗ - 2105 (Легковий автотранспорт)', date : '2012-11-30T00:00:00'}]
     
-    let arr = carsArr.sort((a,b) => (+Date.parse(a.INSERT_DATE.concat('.000')) > +Date.parse(b.INSERT_DATE.concat('.000')))? 1: -1);
+    let arr = carsArr.sort((a,b) => (a.THEFT_DATA > b.THEFT_DATA)? 1: -1);
     
     let oldCar = {};
     let newCar = {};
     let result = [];
 
     oldCar['name'] = arr[0].BRAND;
-    oldCar['date'] = arr[0].INSERT_DATE;
+    oldCar['date'] = arr[0].THEFT_DATA;
 
     newCar['name'] = arr[arr.length-1].BRAND;
-    newCar['date'] = arr[arr.length-1].INSERT_DATE;
+    newCar['date'] = arr[arr.length-1].THEFT_DATA;
 
     result.push(oldCar, newCar);
 
@@ -92,6 +92,5 @@ console.log(countCars(cars));
 //796
 console.log(oldAndNew(cars));
 // (2) [{…}, {…}]
-//0: {name: "BAЗ2101 (Легковий автотранспорт)", date: "1980-07-08T00:00:00"}
-//1: {name: "ГАЗ - 3302 (Вантажний автотранспорт)", date: "2020-02-11T18:40:43"}
-//2020-02-07T06:46:44
+//0: {name: "MERCEDES-BENZ - VITO 115 CDI (Легковий автотранспорт)", date: "1929-10-21T00:00:00"}
+//1: {name: "ГАЗ - 3302 (Вантажний автотранспорт)", date: "2020-02-11T00:00:00"}
