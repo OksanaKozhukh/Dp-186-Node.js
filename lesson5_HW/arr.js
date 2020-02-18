@@ -40,7 +40,7 @@ function myShift (arr) {
         return undefined;
     } else {
         let firstElement = arr[0];     
-        for (let i=0; i < arr.length; i++) {
+        for (let i=0; i < arr.length-1; i++) {
             arr[i] = arr[i+1];
         }
         arr.length = arr.length - 1;
@@ -74,35 +74,21 @@ function myUnshift (arr, ...arg) {
 
 
 // concat()
-function myConcat (arr, ...arg) {
-    let newArr = [];
-     
-    for (let i = 0; i < arr.length + arg.length; i++) {
-        if (i < arr.length) {
-            newArr[i] = arr[i];
+function myConcat (arr, ...rest) {
+    
+    for (let i = 0; i < rest.length; i++) {
+        if (Array.isArray(rest[i])){
+            rest[i].forEach(el => arr.push(el))
         } else {
-            newArr[i] = arg[i - arr.length]
-        }
-    };
-
-    let newArr2 = [];
-
-    for (let i = 0; i < newArr.length; i++) {
-        if (Array.isArray(newArr[i])) {
-            for (let j = 0; j < newArr[i].length; j++) {
-                newArr2[i+j] = newArr[i][j];
-            }
-                        
-        } else { 
-            newArr2[i] = newArr[i];
+            arr.push(rest[i])
         }
     }
-    return newArr2;
+    return arr;
 
 }
 
-console.log(myConcat([1,2,3], 6, [4,5]));
-console.log(myConcat([1,2,3], [4,5], 6));//заменяет последний эл. массива на 6
+//console.log(myConcat([1,2,3], 6, [4,5]));
+//console.log(myConcat([1,2,3], [4,5], 6));
 
 // map task
 let fruits = ['Яблоко', 'Банан', 'Ананас'];
