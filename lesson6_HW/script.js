@@ -28,13 +28,51 @@ function closestPoints (arr) {
     return [point1, point2];
 }
 
-console.log(closestPoints(numberOfPoints));
+//console.log(closestPoints(numberOfPoints));
 
 
 
 // Task 2
-function meeting (arr, need) {
-    let chair = 0; 
+function meeting (arr, num) {
+   
+    let countChair = num;
+    let freeChair;
+    let resultArr = [];
+    
+    if(num === 0) {
+        return 'Game On';
+    }
+
+    for (let i = 0; i < arr.length && countChair > 0; i++) {
+        freeChair = arr[i][1] - arr[i][0].length;
+        if (freeChair > 0) {
+            if (countChair < freeChair) {
+                countChair -= countChair;
+                resultArr[i] = countChair;
+            }
+            countChair -= freeChair; 
+            resultArr[i] = freeChair;
+            
+        } else {resultArr[i] = 0;
+        }
+
+    }
+
+    if(countChair) {
+        return 'Not enough!';
+    }
+
+    return resultArr;    
+}
+
+console.log(meeting([['XXX', 3], ['XXXXX', 6], ['XXXXXX', 9]], 4));
+console.log(meeting([['XXX', 3], ['XXXXX', 6], ['XXXXXX', 9], ['XXXXXX', 9]], 4));
+console.log(meeting([['XXX', 1], ['XXXXX{', 6], ['X', 2], ['XXX{XX', 8], ['X', 3], ['XXX', 1]], 5)); 
+console.log(meeting([['XX', 2], ['XXXX', 6], ['XXXXX', 4]], 0));
+console.log(meeting([['XXX', 3], ['XXXXX', 6], ['XXXXXX', 9]], 6));
+
+
+/*  let chair = 0; 
     let newArr2 = [];     
     let newArr = arr.map(item => item[1] - item[0].length).map(item => item > 0? item: 0);
     let spareChairs = newArr.reduce((a, b) => (a + b), 0);
@@ -59,11 +97,4 @@ function meeting (arr, need) {
         newArr2.pop(); 
     }
     
-    return newArr2;
-}
-
-console.log(meeting([['XXX', 3], ['XXXXX', 6], ['XXXXXX', 9]], 4));
-console.log(meeting([['XXX', 3], ['XXXXX', 6], ['XXXXXX', 9], ['XXXXXX', 9]], 4));
-console.log(meeting([['XXX', 1], ['XXXXX{', 6], ['X', 2], ['XXX{XX', 8], ['X', 3], ['XXX', 1]], 5)); 
-console.log(meeting([['XX', 2], ['XXXX', 6], ['XXXXX', 4]], 0));
-console.log(meeting([['XXX', 3], ['XXXXX', 6], ['XXXXXX', 9]], 6));
+    return newArr2;*/
