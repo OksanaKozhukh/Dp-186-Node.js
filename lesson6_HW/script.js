@@ -35,7 +35,7 @@ console.log(closestPoints(numberOfPoints));
 // Task 2
 function meeting (arr, need) {
     let chair = 0; 
-     
+    let newArr2 = [];     
     let newArr = arr.map(item => item[1] - item[0].length).map(item => item > 0? item: 0);
     let spareChairs = newArr.reduce((a, b) => (a + b), 0);
 
@@ -55,7 +55,9 @@ function meeting (arr, need) {
         }
     }
 
-    
+    if (newArr2[newArr2.length-1] == 0) { 
+        newArr2.pop(); 
+    }
     
     return newArr2;
 }
