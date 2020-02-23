@@ -1,0 +1,12 @@
+[
+    {
+        "name": "xiaomi a4", 
+        "year": "2018",
+        "price": 5000
+    },
+    {
+        "name": "xiaomi note4", 
+        "year": "2014",
+        "price": 6000
+    }
+]
