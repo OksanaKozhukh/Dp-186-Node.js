@@ -107,23 +107,23 @@ function damagedOrSunk(board, attacks) {
     let boat3Demaged = arrPoints.filter(item => item == 3).length;
 
     let result = {};
-    result.suck = 0;
+    result.sunk = 0;
     result.demaged = 0;
     result.notTouched = 0;
     result.points = 0;
 
     if (boat1 == boat1Demaged) {
-        result.suck++;
+        result.sunk++;
         result.points++;
     }
 
     if (boat2 == boat2Demaged) {
-        result.suck++;
+        result.sunk++;
         result.points++;
     }
     
     if (boat3 == boat3Demaged) {
-        result.suck++;
+        result.sunk++;
         result.points++;
     }
 
