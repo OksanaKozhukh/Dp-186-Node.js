@@ -1,21 +1,25 @@
 //-------------------Task1-------------------
 
 function getSolution(arr, sum) {
-    let arrSum = arr.reduce((a,b) => {
-        if (a > sum) {
-            a - b;
-        } else {
-            a + b;
-        }
-        return a;
-    });
-    
-   
-    return arrSum;
+    let sums = [arr[0]];
+  
+    for (let i = 1; i < arr.length; i++) {
+      let curSums = [];
+  
+      sums.forEach(e => {
+        curSums.push(e + arr[i]);
+        curSums.push(e - arr[i]);
+      });
 
-}
-
+      sums = curSums;
+    }
+  
+    return sums.includes(sum);
+  }
+  
+console.log(getSolution([1, 3, 4], 0));
 console.log(getSolution([15, 2, 3], 10));
+console.log(getSolution([1, 5, 3, 2, 5], -2));
 
 
 //-------------------Task2-------------------
