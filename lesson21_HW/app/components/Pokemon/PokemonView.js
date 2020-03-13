@@ -16,7 +16,9 @@ export class PokemonView {
     }
 
     renderValue(list, name) {
-      list.insertAdjacentHTML('beforeend', `<li>${name}</li>`);
+      let item = document.createElement('li');
+      item.innerHTML = name;
+      list.append(item);
     }
 
 }
